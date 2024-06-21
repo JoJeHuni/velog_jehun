@@ -4,9 +4,9 @@ name: Update Blog Posts
 on:
   push:
       branches:
-        - master  # 또는 워크플로우를 트리거하고 싶은 브랜치 이름
+        - main  # 또는 워크플로우를 트리거하고 싶은 브랜치 이름
   schedule:
-    - cron: '0 0 * * *'  # 매 자정마다 실행
+    - cron: '0 6 * * *'  # 매일 오후 7시에 업로드
 
 jobs:
   update_blog:
@@ -17,10 +17,10 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Push changes
-      run: 
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git push https://JoJeHuni${{ secrets.jehuntoken }}@github.com/JoJeHuni/velog_jehun.git
+      run: |
+        git config --global user.name 'JoJeHuni'
+        git config --global user.email 'cho9759@gmail.com'
+        git push https://${{ secrets.GH_PAT_JEHUN }}@github.com/JoJeHuni/velog_jehun.git
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -33,3 +33,6 @@ jobs:
 
     - name: Run script
       run: python scripts/update_blog.py
+
+
+      
